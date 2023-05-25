@@ -16,12 +16,14 @@ export default {
   },
   methods: {
     getData(query) {
-      axios.get(this.store.searchMoviesAPI + query)
-        .then(r => {
-          console.log(r);
-          this.store.moviesFound = r.data.results;
-          console.log(this.store.moviesFound);
-        })
+      axios.get(this.store.searchMoviesAPI + query).then(r => {
+        this.store.moviesFound = r.data.results;
+        console.log(this.store.moviesFound);
+      });
+      axios.get(this.store.searchSeriesAPI + query).then(r => {
+        this.store.seriesFound = r.data.results;
+        console.log(this.store.seriesFound);
+      })
     }
   }
 
@@ -29,7 +31,6 @@ export default {
 </script>
 
 <template>
-  <button class="text-white" @click="findData">PROVA</button>
   <AppHeader @getData="getData" />
   <AppMain />
 </template>

@@ -14,16 +14,11 @@ export default {
     <nav class="p-5 mx-5 flex align-middle gap-10">
       <h1 class="text-red-600 font-bold text-4xl">BOOLFLIX</h1>
       <div class="flex align-middle gap-3">
-        <input type="text" v-model="query">
+        <input class="p-2" type="text" v-model="query">
         <button @click="$emit('getData', this.query)" class="text-red-600 p-3 font-bold rounded border">Search</button>
       </div>
     </nav>
   </header>
 </template>
 
-<style scoped>
-div,
-nav {
-  /* border: 1px solid yellow; */
-}
-</style>
+<style scoped></style>
