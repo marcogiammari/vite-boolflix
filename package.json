@@ -12,6 +12,7 @@
     "axios": "^1.4.0",
     "flag-icons": "^6.6.6",
     "fontawesome": "^5.6.3",
+    "language-icons": "^0.3.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {

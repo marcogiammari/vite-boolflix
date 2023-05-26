@@ -17,11 +17,11 @@ export default {
   methods: {
     getData(query) {
       axios.get(this.store.searchMoviesAPI + query).then(r => {
-        this.store.moviesFound = r.data.results;
+        this.store.moviesFound = r.data.results.filter(e => e.poster_path !== null);
         console.log(this.store.moviesFound);
       });
       axios.get(this.store.searchSeriesAPI + query).then(r => {
-        this.store.seriesFound = r.data.results;
+        this.store.seriesFound = r.data.results.filter(e => e.poster_path !== null);
         console.log(this.store.seriesFound);
       })
     }

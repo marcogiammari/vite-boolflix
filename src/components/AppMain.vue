@@ -20,19 +20,27 @@ export default {
 <template>
     <main>
         <div class="py-10 px-10 flex flex-col items-center">
-            <div v-show="this.store.moviesFound.length" class="flex flex-col max-w-[90%] gap-2">
-                <h2 class="text-red-600 font-bold text-2xl mt-4 self-start">{{ this.store.moviesFound.length }} MOVIES FOUND
+            <div v-show="this.store.moviesFound.length" class="flex flex-col max-w-[90%] gap-5">
+                <h2 class="text-red-400 text-2xl mt-4 self-start">
+                    Movies
                 </h2>
-                <div class=" flex flex-nowrap gap-4 pb-5 overflow-auto min-h-[300px]">
+                <div class=" flex flex-nowrap gap-4 pb-5 overflow-x-auto h-[20rem]">
                     <AppMovies :movie="movie" v-for="movie in store.moviesFound" />
                 </div>
-                <h2 class="text-red-600 font-bold text-2xl mt-4 self-start">{{
-                    this.store.seriesFound.length }} SERIES FOUND
+                <h2 class="text-red-400 text-2xl mt-4 self-start">
+                    Series
                 </h2>
-                <div class=" flex flex-nowrap gap-4 pb-5 overflow-auto min-h-[300px]">
+                <div class=" flex flex-nowrap gap-4 pb-5 overflow-x-auto h-[20rem]">
                     <AppSeries :serie="serie" v-for="serie in store.seriesFound" />
                 </div>
             </div>
         </div>
     </main>
 </template>
+
+
+<style scoped>
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+</style>

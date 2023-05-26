@@ -7,6 +7,30 @@ body {
     height: 100vh;
 }
 
+// APPMOVIES & APPSERIES
+
+.card:hover {
+    border: 1px solid white;
+
+    .card-info {
+        display: flex;
+        background-color: black;
+
+        span {
+            font-size: .75rem;
+        }
+
+        p {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 1rem;
+        }
+
+    }
+
+}
+
 /* SCROLLBARS */
 
 /* width */
@@ -22,7 +46,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #181818;
+    background: #333333;
 }
 
 /* Handle on hover */

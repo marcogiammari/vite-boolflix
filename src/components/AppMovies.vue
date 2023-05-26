@@ -1,4 +1,5 @@
 <script>
+import { flags } from "../data/flags";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 export default {
     name: 'AppMovies',
@@ -7,17 +8,15 @@ export default {
     },
     data() {
         return {
+            flags
         }
     },
     methods: {
         getFlag(lang) {
-            if (lang == 'en') {
-                return 'fi fi-gb'
-            }
-            return 'fi fi-' + lang
+            return 'fi fi-' + this.flags[lang]
         },
         getImgPath(path) {
-            let fullPath = "https://image.tmdb.org/t/p/w342/" + path;
+            let fullPath = "https://image.tmdb.org/t/p/w500/" + path;
             return fullPath
         },
         changeInStars(vote) {
@@ -31,23 +30,19 @@ export default {
 
 <template>
     <div
-        class="card flex flex-col justify-start gap-4 overflow-auto text-white bg-slate-900 rounded-xl border border-red-900 min-w-[200px] max-h-[300px] p-4">
-        <div class="h-1/3">
-            <img v-show="movie.backdrop_path != null" class="rounded" :src="getImgPath(movie.backdrop_path)"
-                :alt="movie.title">
-            <p v-show="movie.backdrop_path == null"
-                class="bg-white text-red-600 h-full flex justify-center items-center font-bold text-xl">
-                N/A</p>
+        class="card flex flex-col justify-start gap-4 text-white bg-slate-900 rounded min-w-[200px] relative overflow-y-visible">
+        <div class="h-full">
+            <img class="rounded h-full" :src="getImgPath(movie.poster_path)" :alt="movie.title">
         </div>
-        <div>
-            <p>Titolo: {{ movie.title }}</p>
-            <p>Titolo originale: {{ movie.original_title }}</p>
-            <p>Lingua: <span :class="getFlag(movie.original_language)"></span></p>
+        <div class="card-info flex flex-col gap-2 absolute hidden rounded w-full h-full pt-10 px-5">
+            <span>Titolo: <p>{{ movie.title }}</p> </span>
+            <span>Titolo originale: <p>{{ movie.original_title }}</p></span>
+            <span class="flex items-center gap-2">Lingua originale: <p :class="getFlag(movie.original_language)"></p></span>
             <p v-if="movie.vote_average > 0">
                 Voto:
                 <span v-for="star in changeInStars(movie.vote_average)"><i
                         class="fa-solid fa-star text-yellow-400"></i></span>
-                <span v-for="star in 5 - changeInStars(movie.vote_average)"><i
+                <span v-for="star in (5 - changeInStars(movie.vote_average))"><i
                         class="fa-regular fa-star text-yellow-400"></i></span>
             </p>
             <p v-else>Voto : n/a</p>
@@ -55,3 +50,5 @@ export default {
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped></style>
