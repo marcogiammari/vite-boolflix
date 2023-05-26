@@ -18,13 +18,19 @@ export default {
     getData(query) {
       axios.get(this.store.searchMoviesAPI + query).then(r => {
         this.store.moviesFound = r.data.results.filter(e => e.poster_path !== null);
-        console.log(this.store.moviesFound);
       });
       axios.get(this.store.searchSeriesAPI + query).then(r => {
         this.store.seriesFound = r.data.results.filter(e => e.poster_path !== null);
-        console.log(this.store.seriesFound);
       })
     }
+  },
+  mounted() {
+    axios.get(this.store.urlAPI + "movie/popular" + this.store.keyAPI + "&language=it_IT").then(r => {
+      this.store.moviesFound = r.data.results.filter(e => e.poster_path !== null);
+    })
+    axios.get(this.store.urlAPI + "tv/popular" + this.store.keyAPI + "&language=it_IT").then(r => {
+      this.store.seriesFound = r.data.results.filter(e => e.poster_path !== null);
+    })
   }
 
 }
