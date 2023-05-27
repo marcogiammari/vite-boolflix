@@ -16,19 +16,11 @@ body {
         display: flex;
         background-color: black;
 
-        span {
+        span,
+        p {
             font-size: .75rem;
         }
-
-        p {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            font-size: 1rem;
-        }
-
     }
-
 }
 
 /* SCROLLBARS */

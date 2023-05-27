@@ -6,5 +6,5 @@ export const services = {
     changeInStars(vote) {
         const stars = Math.ceil(vote / 2);
         return stars
-    }
+    },
 }
