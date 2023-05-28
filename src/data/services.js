@@ -7,4 +7,7 @@ export const services = {
         const stars = Math.ceil(vote / 2);
         return stars
     },
+    componeString(...strings) {
+        return strings.join("")
+    }
 }

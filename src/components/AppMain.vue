@@ -24,13 +24,13 @@ export default {
                 <h2 class="text-red-400 text-2xl mt-4 self-start">
                     Movies
                 </h2>
-                <div class=" flex flex-nowrap gap-4 pb-5 overflow-x-auto h-[20rem]">
+                <div class=" flex flex-nowrap gap-4 pb-5 overflow-x-auto">
                     <AppMovies :movie="movie, i" v-for="movie, i in store.movies" />
                 </div>
                 <h2 class="text-red-400 text-2xl mt-4 self-start">
                     Series
                 </h2>
-                <div class=" flex flex-nowrap gap-4 pb-5 overflow-x-auto h-[20rem]">
+                <div class=" flex flex-nowrap gap-4 pb-5 overflow-x-auto">
                     <AppSeries :serie="serie" v-for="serie in store.series" />
                 </div>
             </div>

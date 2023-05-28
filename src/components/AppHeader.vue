@@ -1,9 +1,11 @@
 <script>
+import { store } from '../data/store';
 export default {
   name: 'AppHeader',
   data() {
     return {
-      query: ""
+      query: "",
+      store
     }
   }
 }
@@ -15,7 +17,9 @@ export default {
       <h1 class="text-red-500 font-bold text-4xl">BOOLFLIX</h1>
       <div class="flex align-middle gap-3">
         <input class="p-2" type="text" v-model="query">
-        <button @click="$emit('getData', this.query)" class="text-red-500 p-3 font-bold rounded border">Search</button>
+        <button
+          @click="$emit('getMovies', this.query, this.store.searchMoviesAPI), $emit('getSeries', this.query, this.store.searchSeriesAPI)"
+          class="text-red-500 p-3 font-bold rounded border">Search</button>
       </div>
     </nav>
   </header>
