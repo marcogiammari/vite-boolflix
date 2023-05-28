@@ -25,8 +25,8 @@ export default {
         <div class="card-info flex-col justify-start gap-1 absolute hidden rounded w-full h-full p-5">
             <span>Titolo: <p>{{ serie.name }}</p> </span>
             <span v-show="serie.name != serie.original_name">Titolo originale: <p>{{ serie.original_name }}</p></span>
-            <span class="flex gap-2">Lingua originale: <img class="w-6"
-                    :src="'https://unpkg.com/language-icons/icons/' + serie.original_language + '.svg'" alt="">
+            <span class="flex gap-2">Lingua originale:
+                <img class="w-6" :src="'https://unpkg.com/language-icons/icons/' + serie.original_language + '.svg'" alt="">
             </span>
             <span>Cast:
                 <div>

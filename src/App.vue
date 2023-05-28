@@ -29,7 +29,7 @@ export default {
             const movieFound = this.store.moviesFound[i];
 
             // seconda chiamata API -> richiama i credits di ogni film trovato
-            axios.get(this.services.componeString(this.store.urlAPI + 'movie/' + movieFound.id + this.store.keyAPI + this.store.itLang + '&append_to_response=credits')).then(r => {
+            axios.get(`${this.store.urlAPI}movie/${movieFound.id}${this.store.keyAPI}&language=it&append_to_response=credits`).then(r => {
               this.store.movies.push(r.data);
             }).catch(error => console.error('Failed request: ', error))
           }
@@ -46,7 +46,7 @@ export default {
             const serieFound = this.store.seriesFound[i];
 
             // seconda chiamata API -> richiama i credits di ogni serie tv trovata
-            axios.get(this.services.componeString(this.store.urlAPI + 'tv/' + serieFound.id + this.store.keyAPI + this.store.itLang + '&append_to_response=credits')).then(r => {
+            axios.get(`${this.store.urlAPI}tv/${serieFound.id}${this.store.keyAPI}&language=it&append_to_response=credits`).then(r => {
               this.store.series.push(r.data);
             }).catch(error => console.error('Failed request: ', error))
           }
@@ -58,8 +58,9 @@ export default {
 
     // al mounted partono due chiamate che ritornano i film e le serie tv più popolari 
 
-    this.getMovies(this.services.componeString('', this.store.urlAPI + "movie/popular" + this.store.keyAPI + "&language=it_IT"))
-    this.getSeries(this.services.componeString('', this.store.urlAPI + "tv/popular" + this.store.keyAPI + "&language=it_IT"))
+    this.getMovies(`${this.store.urlAPI}movie/popular${this.store.keyAPI}&language=it`)
+    this.getSeries(`${this.store.urlAPI}tv/popular${this.store.keyAPI}&language=it`)
+
   }
 
 }

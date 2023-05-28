@@ -16,7 +16,8 @@ export default {
     <nav class="p-5 mx-5 flex flex-col md:flex-row justify-between align-middle gap-3">
       <h1 class="text-red-500 font-bold text-4xl">BOOLFLIX</h1>
       <div class="flex align-middle gap-3">
-        <input class="p-2" type="text" v-model="query">
+        <input class="p-2" type="text" v-model="query"
+          @keyup.enter="$emit('getMovies', this.query, this.store.searchMoviesAPI), $emit('getSeries', this.query, this.store.searchSeriesAPI)">
         <button
           @click="$emit('getMovies', this.query, this.store.searchMoviesAPI), $emit('getSeries', this.query, this.store.searchSeriesAPI)"
           class="text-red-500 p-3 font-bold rounded border">Search</button>

@@ -1,5 +1,4 @@
 <script>
-import axios from "axios";
 import { store } from "../data/store";
 import { services } from "../data/services";
 import { flags } from "../data/flags";
