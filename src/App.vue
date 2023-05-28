@@ -17,7 +17,7 @@ export default {
     }
   },
   methods: {
-    getMovies(query, ...url) {
+    getMovies(genre, query, url) {
       this.store.movies = [];
 
       // prima chiamata API -> ricerca film
@@ -30,12 +30,16 @@ export default {
 
             // seconda chiamata API -> richiama i credits di ogni film trovato
             axios.get(`${this.store.urlAPI}movie/${movieFound.id}${this.store.keyAPI}&language=it&append_to_response=credits`).then(r => {
-              this.store.movies.push(r.data);
+              if (genre) {
+                r.data.genres.some(e => e.id == genre.id) ? this.store.movies.push(r.data) : null;
+              } else {
+                this.store.movies.push(r.data)
+              }
             }).catch(error => console.error('Failed request: ', error))
           }
         });
     },
-    getSeries(query, ...url) {
+    getSeries(genre, query, url) {
       this.store.series = []
       // prima chiamata API -> ricerca serie tv
       axios.get(url + query)
@@ -47,10 +51,24 @@ export default {
 
             // seconda chiamata API -> richiama i credits di ogni serie tv trovata
             axios.get(`${this.store.urlAPI}tv/${serieFound.id}${this.store.keyAPI}&language=it&append_to_response=credits`).then(r => {
-              this.store.series.push(r.data);
+              if (genre) {
+                r.data.genres.some(e => e.id == genre.id) ? this.store.series.push(r.data) : null;
+              } else {
+                this.store.series.push(r.data)
+              }
             }).catch(error => console.error('Failed request: ', error))
           }
         })
+    },
+    getGenres() {
+      axios.get(`${this.store.urlAPI}genre/movie/list${this.store.keyAPI}&language=it`).then(r => {
+        this.store.movieGenres = r.data.genres;
+        console.log(this.store.movieGenres);
+      })
+      axios.get(`${this.store.urlAPI}genre/tv/list${this.store.keyAPI}&language=it`).then(r => {
+        this.store.seriesGenres = r.data.genres;
+        console.log(this.store.seriesGenres);
+      })
     }
   },
 
@@ -58,9 +76,9 @@ export default {
 
     // al mounted partono due chiamate che ritornano i film e le serie tv più popolari 
 
-    this.getMovies(`${this.store.urlAPI}movie/popular${this.store.keyAPI}&language=it`)
-    this.getSeries(`${this.store.urlAPI}tv/popular${this.store.keyAPI}&language=it`)
-
+    this.getMovies("", "", `${this.store.urlAPI}movie/popular${this.store.keyAPI}&language=it`);
+    this.getSeries("", "", `${this.store.urlAPI}tv/popular${this.store.keyAPI}&language=it`);
+    this.getGenres();
   }
 
 }

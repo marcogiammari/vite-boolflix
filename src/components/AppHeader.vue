@@ -4,6 +4,8 @@ export default {
   name: 'AppHeader',
   data() {
     return {
+      movieGenre: "",
+      seriesGenre: "",
       query: "",
       store
     }
@@ -16,10 +18,26 @@ export default {
     <nav class="p-5 mx-5 flex flex-col md:flex-row justify-between align-middle gap-3">
       <h1 class="text-red-500 font-bold text-4xl">BOOLFLIX</h1>
       <div class="flex align-middle gap-3">
+        <select v-model="movieGenre" name="" id="">
+          <option disabled value="">
+            Filtra i film per genere
+          </option>
+          <option v-for="mGenre in this.store.movieGenres" :value="mGenre">
+            {{ mGenre.name }}
+          </option>
+        </select>
+        <select v-model="seriesGenre" name="" id="">
+          <option disabled value="">
+            Filtra le serie TV per genere
+          </option>
+          <option v-for="sGenre in this.store.seriesGenres" :value="sGenre">
+            {{ sGenre.name }}
+          </option>
+        </select>
         <input class="p-2" type="text" v-model="query"
-          @keyup.enter="$emit('getMovies', this.query, this.store.searchMoviesAPI), $emit('getSeries', this.query, this.store.searchSeriesAPI)">
+          @keyup.enter="$emit('getMovies', this.movieGenre, this.query, this.store.searchMoviesAPI), $emit('getSeries', this.seriesGenre, this.query, this.store.searchSeriesAPI)">
         <button
-          @click="$emit('getMovies', this.query, this.store.searchMoviesAPI), $emit('getSeries', this.query, this.store.searchSeriesAPI)"
+          @click="$emit('getMovies', this.movieGenre, this.query, this.store.searchMoviesAPI), $emit('getSeries', this.seriesGenre, this.query, this.store.searchSeriesAPI)"
           class="text-red-500 p-3 font-bold rounded border">Search</button>
       </div>
     </nav>
